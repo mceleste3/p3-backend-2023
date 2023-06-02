@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  forumdb:
+    image: postgres
+    container_name: forumdb
+    restart: always
+    environment:
+      - POSTGRES_USER=celeste
+      - POSTGRES_PASSWORD=fullstackp3
+      - POSTGRES_DB=forumdb
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:
+   
+
