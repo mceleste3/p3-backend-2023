@@ -11,10 +11,11 @@ model Owner {
   id            Int    @id @default(autoincrement())
   fullName      String
   adress        String
-  postalCode    Int
+  postalCode    String
   contactNumber Int?
   contactEmail  String
   dogs          Dog[]
+  //contracts     Contract[]
 }
 
 model PetSitter {
@@ -24,14 +25,14 @@ model PetSitter {
   postalCode    String
   contactNumber Int
   email         String
-  availability  DateTime[]
-  sevices       Sevice[]
+  services       Service[]
+  contracts     Contract[]
 }
 
-model Sevice {
-  id          Int       @id @default(autoincrement())
-  type        String
-  price       Float
+model Service {
+  id    Int    @id @default(autoincrement())
+  type  String
+  price Float
   petSitterId Int
   petSitter   PetSitter @relation(fields: [petSitterId], references: [id])
 }
@@ -40,10 +41,25 @@ model Dog {
   id                    Int      @id @default(autoincrement())
   name                  String
   size                  String
-  race                  String
+  race                  String?
   bithdate              DateTime
   medication            Boolean
   addicionalInformation String?
-  ownerId               Int
-  owner                 Owner    @relation(fields: [ownerId], references: [id])
+
+  ownerId   Int
+  owner     Owner      @relation(fields: [ownerId], references: [id])
+  contracts Contract[]
+}
+
+model Contract {
+  details String
+  id    Int      @id @default(autoincrement())
+  start DateTime
+  end   DateTime
+  //ownerId Int se puede sacar a partir del perro 
+  //owner   Owner @relation(fields: [ownerId], references: [id])
+  dogId       Int
+  dog         Dog       @relation(fields: [dogId], references: [id])
+  petSitterId Int
+  petSitter   PetSitter @relation(fields: [petSitterId], references: [id])
 }
