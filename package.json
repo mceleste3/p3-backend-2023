@@ -4,13 +4,16 @@
   "description": "Se trata de hacer un _backend_ usando Typescript, Express y Prisma. El _backend_ implementado en clase es el modelo a seguir. Para alumnos que lo hacen por primera vez y sienten algo de incomodidad, lo ideal es usar el modelo de guía y hacer un _backend_ cercano al original de tal manera que la práctica sea un repaso a fondo. Para los que estén más cómodos, lo ideal es innovar en algun aspecto y salirse parcialmente del modelo en ciertos momentos o explorar algún interés personal.",
   "main": "src/server.ts",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "dev": "nodemon src/server.ts"
+  },
   "keywords": [],
   "author": "celeste",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.15.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.1.3",
     "express": "^4.18.2",
     "morgan": "^1.10.0"
   },

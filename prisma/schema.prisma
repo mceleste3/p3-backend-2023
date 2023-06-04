@@ -52,8 +52,8 @@ model Dog {
 }
 
 model Contract {
-  details String
   id    Int      @id @default(autoincrement())
+  details String
   start DateTime
   end   DateTime
   //ownerId Int se puede sacar a partir del perro 

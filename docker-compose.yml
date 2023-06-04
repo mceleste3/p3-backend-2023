@@ -1,14 +1,14 @@
 version: '3'
 
 services:
-  forumdb:
+  dogSitterdb:
     image: postgres
-    container_name: forumdb
+    container_name: dogSitterdb
     restart: always
     environment:
       - POSTGRES_USER=celeste
       - POSTGRES_PASSWORD=fullstackp3
-      - POSTGRES_DB=forumdb
+      - POSTGRES_DB=dogSitterdb
     ports:
       - 5432:5432
     volumes:

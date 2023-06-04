@@ -48,8 +48,8 @@ CREATE TABLE "Dog" (
 
 -- CreateTable
 CREATE TABLE "Contract" (
-    "details" TEXT NOT NULL,
     "id" SERIAL NOT NULL,
+    "details" TEXT NOT NULL,
     "start" TIMESTAMP(3) NOT NULL,
     "end" TIMESTAMP(3) NOT NULL,
     "dogId" INTEGER NOT NULL,
