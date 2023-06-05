@@ -7,6 +7,7 @@ import { RequestWithPetSitterId } from "./petsitter.js";
 const router = Router();
 
 //petSitter/:id/contracts
+//READ
 router.get("/", errorChecked(async (req: RequestWithPetSitterId, res) => {
     const contracts = await prisma.contract.findMany({
         where: {

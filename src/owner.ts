@@ -51,5 +51,14 @@ router.delete("/:id", errorChecked(async (req: RequestWithOwnerId, res) => {
   res.status(200).json(deletedOwner);
 }));
 
+//Dogs Owner list
+router.get("/:id/dogs", errorChecked(async (req: RequestWithOwnerId, res) => {
+    const dogs = await prisma.dog.findMany({
+        where: {
+            ownerId: req.ownerId
+        }
+    });
+    res.status(200).json(dogs);
+  }));
 
 export default router;

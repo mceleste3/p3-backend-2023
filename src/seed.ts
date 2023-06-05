@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+//OWNER
 const o1 = await prisma.owner.create({
   data: {
     fullName: "Juan Cruz Molino",
@@ -32,6 +33,7 @@ const o3 = await prisma.owner.create({
 });
 console.log(`Owner created ${o3.fullName}`);
 
+//PET SITTER
 const ps1 = await prisma.petSitter.create({
   data: {
     fullName: "Pedro Martinez Diaz",
@@ -54,6 +56,7 @@ const ps2 = await prisma.petSitter.create({
 });
 console.log(`Pet sitter created ${ps2.fullName}`);
 
+//SERVICE
 await prisma.service.createMany({
   data: [
     { type: "Dog Walking", price: 11, petSitterId: ps1.id },
@@ -63,31 +66,8 @@ await prisma.service.createMany({
     { type: "Hosting for night", price: 25, petSitterId: ps2.id },
   ],
 });
-/*const s1 = await prisma.service.create({
-    data: 
-        {type: "Dog Walking", price: 11, petSitterId: ps1.id}
-});
 
-const s2 = await prisma.service.create({
-    data: 
-    {type: "Doggy Day Care", price: 15, petSitterId: ps1.id}
-});
-
-const s3 = await prisma.service.create({
-    data: 
-    {type: "Dog Walking", price: 14.5, petSitterId: ps2.id}
-});
-
-const s4 = await prisma.service.create({
-    data: 
-    {type: "Doggy Day Care", price: 18, petSitterId: ps2.id}
-});
-
-const s5 = await prisma.service.create({
-    data: 
-    {type: "Hosting for night", price: 25, petSitterId: ps2.id}
-});*/
-
+//DOG
 const d1 = await prisma.dog.create({
   data: {
     name: "Lira",
@@ -131,7 +111,9 @@ const d4 = await prisma.dog.create({
   },
 });
 console.log(`Dog created ${d4.name}`);
-//Insomnia: Date format YYYY-MM-DDTHH:mm:ss.sssZ, ex."start": "2023-05-15T00:00:00.000Z",
+//Insomnia: Date format YYYY-MM-DDTHH:mm:ss.sssZ, ex."start": "2023-05-15T00:00:00.000Z"
+
+//CONTRACT
 await prisma.contract.createMany({
   data: [
     {

@@ -2,6 +2,7 @@ import { Request, Router } from "express";
 import prisma from "./prisma-client.js";
 import { errorChecked } from "./utils.js";
 import contractsRouter from "./contract.js"
+import serviceRouter from "./service.js"
 
 const router = Router();
 
@@ -53,5 +54,6 @@ router.delete("/:id", errorChecked(async (req: RequestWithPetSitterId, res) => {
 }));
 
 router.use("/:id/contracts", contractsRouter);
+router.use("/:id/service", serviceRouter)
 
 export default router;

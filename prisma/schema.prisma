@@ -47,7 +47,7 @@ model Dog {
 
   ownerId   Int
   owner     Owner      @relation(fields: [ownerId], references: [id])
-  contracts Contract[]
+  contracts Contract[] //para saber a que perro específicamente se le esta realizando el servicio, ya que el dueño puede tener varios 
 }
 
 model Contract {
