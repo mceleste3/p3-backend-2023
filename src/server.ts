@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import petSitterRouter from "./petsitter.js";
+import dogRouter from "./dog.js"
 import { defaultErrorHandler } from "./utils.js";
 
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/petsitter", petSitterRouter);
+app.use("/dog", dogRouter);
 
 app.get("/Hi/:n", async (req, res, next) => {
   const { n } = req.params;
