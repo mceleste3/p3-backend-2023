@@ -35,6 +35,14 @@ router.use("/:id", async(req: RequestWithServiceId, res, next) => {
     next();
 }); 
 
+//READ ONE
+router.get("/:id", errorChecked(async (req: RequestWithServiceId, res) => {
+    const service = await prisma.service.findUniqueOrThrow({
+      where: { id: req.serviceId },
+    });
+    res.status(200).json(service);
+ }));
+
 //DELETE
 router.delete("/:id", errorChecked(async (req: RequestWithServiceId, res) => {
     const deletedService = await prisma.service.delete({

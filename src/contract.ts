@@ -25,6 +25,40 @@ router.post("/", errorChecked(async (req: RequestWithPetSitterId, res) => {
     res.status(200).json(newContract);
 }));
 
+export interface RequestWithContractId extends Request{
+    contractId: number;
+}
+router.use("/:id", async(req: RequestWithContractId, res, next) => {
+    const { id } = req.params;
+    req.contractId = Number(id);
+    next();
+});
+
+//READ ONE
+router.get("/:id", errorChecked(async (req: RequestWithContractId, res) => {
+    const contract = await prisma.contract.findUniqueOrThrow({
+      where: { id: req.contractId },
+    });
+    res.status(200).json(contract);
+ }));
+ 
+//DELETE
+router.delete("/:id", errorChecked(async (req: RequestWithContractId, res) => {
+    const deletedContract = await prisma.contract.delete({
+      where: { id: req.contractId },
+    });
+    res.status(200).json(deletedContract);
+}));
+
+//UPDATE
+router.put("/:id", errorChecked(async (req: RequestWithContractId, res) => {
+    const updatedContract = await prisma.contract.update({
+      where: { id: req.contractId },
+      data: req.body,
+    });
+    res.status(200).json(updatedContract);
+}));
+
 
 export default router;
 
