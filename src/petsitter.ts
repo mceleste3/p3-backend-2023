@@ -1,6 +1,7 @@
-import { Router } from "express";
+import { Request, Router } from "express";
 import prisma from "./prisma-client.js";
 import { errorChecked } from "./utils.js";
+import contractsRouter from "./contract.js"
 
 const router = Router();
 
@@ -17,32 +18,40 @@ router.post("/", errorChecked(async (req, res) => {
     res.status(200).json({ newPetSitter, ok: true });
 }));
 
+export interface RequestWithPetSitterId extends Request{
+    petSitterId: number;
+}
+router.use("/:id", async(req: RequestWithPetSitterId, res, next) => {
+    const { id } = req.params;
+    req.petSitterId = Number(id);
+    next();
+}); 
+
 //READ
-router.get("/:id", errorChecked(async (req, res) => {
-  const { id } = req.params;
+router.get("/:id", errorChecked(async (req: RequestWithPetSitterId, res) => {
   const petsitter = await prisma.petSitter.findUniqueOrThrow({
-    where: { id: Number(id) },
+    where: { id: req.petSitterId },
   });
   res.status(200).json(petsitter);
 }));
 
 //UPDATE
-router.put("/:id", errorChecked(async (req, res) => {
-  const { id } = req.params;
+router.put("/:id", errorChecked(async (req: RequestWithPetSitterId, res) => {
   const updatedPetSitter = await prisma.petSitter.update({
-    where: { id: Number(id) },
+    where: { id: req.petSitterId },
     data: req.body,
   });
   res.status(200).json(updatedPetSitter);
 }));
 
 //DELETE
-router.delete("/:id", errorChecked(async (req, res) => {
-  const { id } = req.params;
+router.delete("/:id", errorChecked(async (req: RequestWithPetSitterId, res) => {
   const deletedPetSitter = await prisma.petSitter.delete({
-    where: { id: Number(id) },
+    where: { id: req.petSitterId },
   });
   res.status(200).json(deletedPetSitter);
 }));
+
+router.use("/:id/contracts", contractsRouter);
 
 export default router;

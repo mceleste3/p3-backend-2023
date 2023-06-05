@@ -3,6 +3,5 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "nodenext",
-    "strict": true
   }
 }

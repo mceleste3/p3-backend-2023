@@ -131,7 +131,7 @@ const d4 = await prisma.dog.create({
   },
 });
 console.log(`Dog created ${d4.name}`);
-
+//Insomnia: Date format YYYY-MM-DDTHH:mm:ss.sssZ, ex."start": "2023-05-15T00:00:00.000Z",
 await prisma.contract.createMany({
   data: [
     {
