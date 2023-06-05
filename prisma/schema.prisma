@@ -15,7 +15,6 @@ model Owner {
   contactNumber Int?
   contactEmail  String
   dogs          Dog[]
-  //contracts     Contract[]
 }
 
 model PetSitter {
@@ -56,8 +55,7 @@ model Contract {
   details String
   start DateTime
   end   DateTime
-  //ownerId Int se puede sacar a partir del perro 
-  //owner   Owner @relation(fields: [ownerId], references: [id])
+  
   dogId       Int
   dog         Dog       @relation(fields: [dogId], references: [id])
   petSitterId Int
